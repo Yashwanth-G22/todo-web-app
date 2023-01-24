@@ -1,8 +1,9 @@
- export function cloudServer(){
+ function cloudServer(){
     const apiURL = `https://mk-ap-todo-webapi.azurewebsites.net/api/YeswanthTodoItems`;
 
     return{
         get : async function (){
+            console.log('yash')
             const response = await fetch(apiURL , {method : 'GET'})
             return response.json()
         },
@@ -19,7 +20,7 @@
           let result = await this.set(apiURL,{
                 method : 'POST',
                 body : JSON.stringify({
-                    "name" : name
+                    name : name
                 })
             })
             console.log(result.id)
@@ -47,5 +48,6 @@
     }
     
 }
-let result = cloudServer().get()
-console.log(result)
+export default cloudServer
+// let result = cloudServer().get()
+// console.log(result)
