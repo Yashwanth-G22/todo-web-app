@@ -13,9 +13,13 @@ function cloudServer(){
            ...options,
            headers : header,
           })
+          return response.json()
         },
-        post : function(){
-            
+        post : function(apiURL,name){
+            this.set(apiURL,{
+                method : 'POST',
+                body : name,
+            })
         },
         put : function(){
 
@@ -26,4 +30,4 @@ function cloudServer(){
     }
 
 }
-cloudServer().set()
+cloudServer().post('yash')
