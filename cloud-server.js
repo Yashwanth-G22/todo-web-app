@@ -1,4 +1,4 @@
-function cloudServer(){
+ function cloudServer(){
     const apiURL = `https://mk-ap-todo-webapi.azurewebsites.net/api/YeswanthTodoItems`;
 
     return{
@@ -47,4 +47,5 @@ function cloudServer(){
     }
     
 }
-cloudServer().deleteAll()
+let result = cloudServer().get()
+console.log(result)
