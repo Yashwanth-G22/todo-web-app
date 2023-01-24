@@ -15,19 +15,30 @@ function cloudServer(){
           })
           return response.json()
         },
-        post : function(apiURL,name){
+        post : function(name){
             this.set(apiURL,{
                 method : 'POST',
-                body : name,
+                body : JSON.stringify({
+                    "name" : name
+                })
             })
         },
-        put : function(){
-
+        put : function(id , name){
+            this.set(`${apiURL}/${id}`,{
+                method :'PUT',
+                body : JSON.stringify({
+                    "id" : id ,
+                    "name" : name ,
+                    "isCompleted" : true
+                })
+            })
         },
-        delete : function(){
-
+        delete : function(id){
+            this.set(`${apiURL}/${id}`,{
+                method : 'DELETE',
+            })
         },
     }
-
+    
 }
-cloudServer().post('yash')
+cloudServer().delete(2)
