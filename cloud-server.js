@@ -15,13 +15,14 @@ function cloudServer(){
           })
           return response.json()
         },
-        post : function(name){
-            this.set(apiURL,{
+        post : async function(name){
+          let result = await this.set(apiURL,{
                 method : 'POST',
                 body : JSON.stringify({
                     "name" : name
                 })
             })
+            console.log(result.id)
         },
         put : function(id , name){
             this.set(`${apiURL}/${id}`,{
@@ -38,7 +39,12 @@ function cloudServer(){
                 method : 'DELETE',
             })
         },
+        deleteAll : function(){
+            this.set(`https://mk-ap-todo-webapi.azurewebsites.net/deleteAll`,{
+                method : 'DELETE'
+            })
+        }
     }
     
 }
-cloudServer().delete(2)
+cloudServer().deleteAll()
