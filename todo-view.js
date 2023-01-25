@@ -16,11 +16,10 @@ function todoView() {
             li.appendChild(span)
             const editBtn = document.createElement('button')
             editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-            editBtn.addEventListener('click', () => {
+            editBtn.addEventListener('click', async () => {
                 const update = document.createElement('input')
                 update.classList = 'secondInput'
                 update.type = 'text';
-                const updateValue = update.value
                 if (flag) {
                     flag = false
                     span.innerHTML = ''
@@ -28,20 +27,12 @@ function todoView() {
                     console.log('1st click')
                     editBtn.innerHTML = `<i class="fa fa-check"></i>`
                 } else {
+                    const updateValue = document.querySelector('.secondInput').value
                     console.log(updateValue)
+                    let result = await cloudServer().put(index,updateValue)
+                    console.log(result)
                 }
             })
-            // const save = document.createElement('button')
-            // save.innerText = `save`
-            // save.classList = 'saveUpdate'
-            // save.addEventListener('click',()=>{
-            //     console.log('save btn clicked')
-            //     console.log(update.value, index)
-            //     cloudServer().put(index,update.value)
-            // })
-            // editBtn.appendChild(save)
-
-            // })
             li.appendChild(editBtn)
             const btn = document.createElement('button')
             btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
