@@ -74,4 +74,8 @@ input[type="text"]{
     flex-direction: column;
     gap: 4px;
 }
-
+.saveUpdate{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: -20px;
+}

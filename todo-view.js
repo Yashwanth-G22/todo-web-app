@@ -21,10 +21,10 @@ function todoView() {
                 update.type = 'text';
                 span.innerHTML = ''
                 span.appendChild(update)
-                editBtn.innerHTML = 'save'
-                // const save = document.createElement('button')
-                // save.innerText = `save`
-                // editBtn.appendChild(save)
+                const save = document.createElement('button')
+                save.innerText = `save`
+                save.classList = 'saveUpdate'
+                editBtn.appendChild(save)
 
             })
             li.appendChild(editBtn)
