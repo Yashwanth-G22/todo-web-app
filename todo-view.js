@@ -21,13 +21,16 @@ function todoView() {
                 update.type = 'text';
                 span.innerHTML = ''
                 span.appendChild(update)
-                const save = document.createElement('button')
-                save.innerText = `save`
-                save.classList = 'saveUpdate'
-                save.addEventListener('click',()=>{
-                    console.log('save btn clicked')
-                })
-                editBtn.appendChild(save)
+                
+                // const save = document.createElement('button')
+                // save.innerText = `save`
+                // save.classList = 'saveUpdate'
+                // save.addEventListener('click',()=>{
+                //     console.log('save btn clicked')
+                //     console.log(update.value, index)
+                //     cloudServer().put(index,update.value)
+                // })
+                // editBtn.appendChild(save)
 
             })
             li.appendChild(editBtn)
