@@ -36,5 +36,5 @@ function todoView() {
 
 btn.addEventListener('click', (e)=>{
     e.preventDefault()
-    todoView().createTask()
+    todoView().createTask
 })
