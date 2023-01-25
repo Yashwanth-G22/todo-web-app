@@ -23,7 +23,7 @@
                     name : name
                 })
             })
-            console.log(result.id)
+            return result;
         },
         put : function(id , name){
             this.set(`${apiURL}/${id}`,{
