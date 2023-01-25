@@ -16,10 +16,24 @@ function todoView() {
             li.appendChild(span)
             const editBtn = document.createElement('button')
             editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
+            editBtn.addEventListener('click',()=>{
+                const update = document.createElement('input')
+                update.type = 'text';
+                span.innerHTML = ''
+                span.appendChild(update)
+                editBtn.innerHTML = 'save'
+                // const save = document.createElement('button')
+                // save.innerText = `save`
+                // editBtn.appendChild(save)
+
+            })
             li.appendChild(editBtn)
             const btn = document.createElement('button')
             btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
-            btn.addEventListener('click',cloudServer().delete.bind(this,index))
+            btn.addEventListener('click',()=>{
+                console.log('deleted')
+                cloudServer().delete(index)
+            })
             li.appendChild(btn)
             return ul.appendChild(li)
         },
@@ -32,6 +46,7 @@ function todoView() {
             console.log(result.status)
 
             if(result.id && result.name){
+                console.log('created')
                 this.createLi(result.name,result.id)
             }
         }
