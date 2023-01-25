@@ -25,7 +25,7 @@ function todoView() {
                 save.innerText = `save`
                 save.classList = 'saveUpdate'
                 save.addEventListener('click',()=>{
-                    
+                    console.log('save btn clicked')
                 })
                 editBtn.appendChild(save)
 
@@ -43,6 +43,7 @@ function todoView() {
         createTask : async function () {
             
             const value = input.value
+            if(value){
             input.value = '';
             console.log(value)
             let result = await cloudServer().post(value)
@@ -51,6 +52,9 @@ function todoView() {
             if(result.id && result.name){
                 console.log('created')
                 this.createLi(result.name,result.id)
+            }
+        }else{
+                alert('Enter task name')
             }
         }
     }
