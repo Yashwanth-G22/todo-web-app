@@ -25,8 +25,8 @@
             })
             return result;
         },
-        put : function(id , name){
-            this.set(`${apiURL}/${id}`,{
+        put :async function(id , name){
+           let result = await this.set(`${apiURL}/${id}`,{
                 method :'PUT',
                 body : JSON.stringify({
                     "id" : id ,
@@ -34,6 +34,7 @@
                     "isCompleted" : true
                 })
             })
+            return result
         },
         delete : function(id){
             this.set(`${apiURL}/${id}`,{

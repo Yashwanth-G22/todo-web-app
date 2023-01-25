@@ -79,3 +79,9 @@ input[type="text"]{
     border-radius: 10px;
     margin-top: 30px;
 }
+.secondInput{
+    width: 90%;
+    border-radius: 10px;
+    border: 2px solid inset;
+    background-color: rgba(32, 25, 25, 0.9);
+}

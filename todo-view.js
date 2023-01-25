@@ -5,10 +5,10 @@ import cloudServer from "./cloud-server.js";
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
-
+let flag = true
 function todoView() {
     return {
-        createLi: function (elem,index) {
+        createLi: function (elem, index) {
             const li = document.createElement('li')
             li.classList = 'li-List';
             const span = document.createElement('span')
@@ -16,54 +16,63 @@ function todoView() {
             li.appendChild(span)
             const editBtn = document.createElement('button')
             editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-            editBtn.addEventListener('click',()=>{
+            editBtn.addEventListener('click', () => {
                 const update = document.createElement('input')
+                update.classList = 'secondInput'
                 update.type = 'text';
-                span.innerHTML = ''
-                span.appendChild(update)
-                
-                // const save = document.createElement('button')
-                // save.innerText = `save`
-                // save.classList = 'saveUpdate'
-                // save.addEventListener('click',()=>{
-                //     console.log('save btn clicked')
-                //     console.log(update.value, index)
-                //     cloudServer().put(index,update.value)
-                // })
-                // editBtn.appendChild(save)
-
+                const updateValue = update.value
+                if (flag) {
+                    flag = false
+                    span.innerHTML = ''
+                    span.appendChild(update)
+                    console.log('1st click')
+                    editBtn.innerHTML = `<i class="fa fa-check"></i>`
+                } else {
+                    console.log(updateValue)
+                }
             })
+            // const save = document.createElement('button')
+            // save.innerText = `save`
+            // save.classList = 'saveUpdate'
+            // save.addEventListener('click',()=>{
+            //     console.log('save btn clicked')
+            //     console.log(update.value, index)
+            //     cloudServer().put(index,update.value)
+            // })
+            // editBtn.appendChild(save)
+
+            // })
             li.appendChild(editBtn)
             const btn = document.createElement('button')
             btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
-            btn.addEventListener('click',()=>{
+            btn.addEventListener('click', () => {
                 console.log('deleted')
                 cloudServer().delete(index)
             })
             li.appendChild(btn)
             return ul.appendChild(li)
         },
-        createTask : async function () {
-            
-            const value = input.value
-            if(value){
-            input.value = '';
-            console.log(value)
-            let result = await cloudServer().post(value)
-            console.log(result.status)
+        createTask: async function () {
 
-            if(result.id && result.name){
-                console.log('created')
-                this.createLi(result.name,result.id)
-            }
-        }else{
+            const value = input.value
+            if (value) {
+                input.value = '';
+                console.log(value)
+                let result = await cloudServer().post(value)
+                console.log(result.status)
+
+                if (result.id && result.name) {
+                    console.log('created')
+                    this.createLi(result.name, result.id)
+                }
+            } else {
                 alert('Enter task name')
             }
         }
     }
 }
 
-btn.addEventListener('click', (e)=>{
+btn.addEventListener('click', (e) => {
     e.preventDefault()
     todoView().createTask()
 })
