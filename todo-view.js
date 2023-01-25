@@ -62,8 +62,13 @@ function todoView() {
         }
     }
 }
+    function msg(){
+        console.log('HELLO WORLD')
+    }
+    
 
 btn.addEventListener('click', (e) => {
     e.preventDefault()
+    msg()
     todoView().createTask()
 })
