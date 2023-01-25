@@ -24,6 +24,9 @@ function todoView() {
                 const save = document.createElement('button')
                 save.innerText = `save`
                 save.classList = 'saveUpdate'
+                save.addEventListener('click',()=>{
+                    
+                })
                 editBtn.appendChild(save)
 
             })
