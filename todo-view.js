@@ -6,6 +6,7 @@ const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
 let flag = true
+let clearAl = true
 function todoView() {
     return {
         createLi: function (elem, index) {
@@ -27,14 +28,14 @@ function todoView() {
                     console.log('1st click')
                     editBtn.innerHTML = `<i class="fa fa-check"></i>`
                 } else {
-                    flag = true; 
+                    flag = true;
                     let updateValue = document.querySelector('.secondInput').value
                     console.log(updateValue)
-                    let result = cloudServer().put(index,updateValue)
+                    let result = cloudServer().put(index, updateValue)
                     console.log(result)
                     span.innerHTML = updateValue
                     updateValue = ''
-                    editBtn.innerHTML = `<i class="fas fa-pencil"></i>`                  
+                    editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
                 }
             })
             li.appendChild(editBtn)
@@ -45,6 +46,7 @@ function todoView() {
                 cloudServer().delete(index)
             })
             li.appendChild(btn)
+            this.clearAll()
             return ul.appendChild(li)
         },
         createTask: async function () {
@@ -65,7 +67,7 @@ function todoView() {
             }
         }
     }
-}    
+}
 
 btn.addEventListener('click', (e) => {
     e.preventDefault()
