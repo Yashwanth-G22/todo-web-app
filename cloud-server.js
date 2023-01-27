@@ -17,7 +17,7 @@
           return response.json()
         },
         post : async function(name){
-          let result = await this.set(apiURL,{
+          const result = await this.set(apiURL,{
                 method : 'POST',
                 body : JSON.stringify({
                     name : name
@@ -25,8 +25,8 @@
             })
             return result;
         },
-        put :async function(id , name){
-           let result = await this.set(`${apiURL}/${id}`,{
+        put : function(id , name){
+          const result =  this.set(`${apiURL}/${id}`,{
                 method :'PUT',
                 body : JSON.stringify({
                     "id" : id ,
