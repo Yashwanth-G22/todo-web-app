@@ -46,7 +46,6 @@ function todoView() {
                 cloudServer().delete(index)
             })
             li.appendChild(btn)
-            this.clearAll()
             return ul.appendChild(li)
         },
         createTask: async function () {
