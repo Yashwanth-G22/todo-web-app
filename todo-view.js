@@ -32,9 +32,9 @@ function todoView() {
                     console.log(updateValue)
                     let result = cloudServer().put(index,updateValue)
                     console.log(result)
+                    editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
                     span.innerHTML = updateValue
                     updateValue = ''
-                    editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
                     li.appendChild(span)
                    
                 }
