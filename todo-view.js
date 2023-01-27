@@ -6,7 +6,6 @@ const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
 let flag = true
-let clearAl = true
 function todoView() {
     return {
         createLi: function (elem, index) {
