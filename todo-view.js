@@ -30,8 +30,11 @@ function todoView() {
                     const updateValue = document.querySelector('.secondInput').value
                     console.log(updateValue)
                     let result = cloudServer().put(index,updateValue)
-                    console.log(result)
-
+                    console.log(result.json())
+                    span.innerHTML = updateValue
+                    updateValue = ''
+                    li.appendChild(span)
+                    editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
                 }
             })
             li.appendChild(editBtn)
