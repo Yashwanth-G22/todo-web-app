@@ -16,7 +16,7 @@ function todoView() {
             li.appendChild(span)
             const editBtn = document.createElement('button')
             editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-            editBtn.addEventListener('click', async () => {
+            editBtn.addEventListener('click', () => {
                 const update = document.createElement('input')
                 update.classList = 'secondInput'
                 update.type = 'text';
@@ -27,14 +27,16 @@ function todoView() {
                     console.log('1st click')
                     editBtn.innerHTML = `<i class="fa fa-check"></i>`
                 } else {
+                    flag = true; 
                     const updateValue = document.querySelector('.secondInput').value
                     console.log(updateValue)
                     let result = cloudServer().put(index,updateValue)
-                    console.log(result.json())
+                    console.log(result)
                     span.innerHTML = updateValue
                     updateValue = ''
-                    li.appendChild(span)
                     editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
+                    li.appendChild(span)
+                   
                 }
             })
             li.appendChild(editBtn)
