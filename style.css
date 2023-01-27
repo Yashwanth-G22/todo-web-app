@@ -85,3 +85,9 @@ input[type="text"]{
     border: 2px solid inset;
     background-color: rgba(32, 25, 25, 0.9);
 }
+.clearAllBtn{
+    border: 2px solid blanchedalmond;
+    border-radius: 10px;
+    background-color: rgb(86, 76, 36);
+    margin-left: 150px;
+}
