@@ -65,11 +65,11 @@ function todoView() {
                 alert('Enter task name')
             }
         },
-        createAllTasks : async function (){
+        createAllTasks: async function () {
             let list = await cloudServer().get()
             console.log(list)
-            list.map(({name,id})=>{
-                this.createLi(name , id)
+            list.map(({ name, id }) => {
+                this.createLi(name, id)
             })
         },
     }
@@ -79,10 +79,10 @@ btn.addEventListener('click', (e) => {
     e.preventDefault()
     todoView().createTask()
 })
- 
-    todoView().createAllTasks()
+
+todoView().createAllTasks()
 
 const clearAll = document.querySelector('.clearAllBtn')
-.addEventListener('click',cloudServer().deleteAll())
+    .addEventListener('click', cloudServer().deleteAll())
 
 //console.log(localServer().delete(0))
