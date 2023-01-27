@@ -21,3 +21,4 @@ function localServer() {
         },
     }
 }
+export localServer
