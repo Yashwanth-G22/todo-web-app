@@ -64,7 +64,14 @@ function todoView() {
             } else {
                 alert('Enter task name')
             }
-        }
+        },
+        createAllTasks : async function (){
+            let list = await cloudServer().get()
+            console.log(list)
+            list.map(({name,id})=>{
+                this.createLi(name , id)
+            })
+        },
     }
 }
 
@@ -72,3 +79,5 @@ btn.addEventListener('click', (e) => {
     e.preventDefault()
     todoView().createTask()
 })
+ 
+    todoView().createAllTasks()
