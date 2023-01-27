@@ -21,4 +21,4 @@ function localServer() {
         },
     }
 }
-export localServer
+export default localServer

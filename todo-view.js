@@ -1,5 +1,6 @@
 import cloudServer from "./cloud-server.js";
 
+import localServer from "./localStorage-server.js";
 //console.log(cloudServer().deleteAll())
 
 const input = document.querySelector('.input');
@@ -83,3 +84,5 @@ btn.addEventListener('click', (e) => {
 
 const clearAll = document.querySelector('.clearAllBtn')
 .addEventListener('click',cloudServer().deleteAll())
+
+//console.log(localServer().delete(0))
