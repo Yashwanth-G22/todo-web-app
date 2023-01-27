@@ -29,8 +29,9 @@ function todoView() {
                 } else {
                     const updateValue = document.querySelector('.secondInput').value
                     console.log(updateValue)
-                    let result = await cloudServer().put(index,updateValue)
+                    let result = cloudServer().put(index,updateValue)
                     console.log(result)
+
                 }
             })
             li.appendChild(editBtn)
@@ -61,14 +62,9 @@ function todoView() {
             }
         }
     }
-}
-    function msg(){
-        console.log('HELLO WORLD')
-    }
-    
+}    
 
 btn.addEventListener('click', (e) => {
     e.preventDefault()
-    msg()
     todoView().createTask()
 })
