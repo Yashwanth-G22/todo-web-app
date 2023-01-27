@@ -28,15 +28,13 @@ function todoView() {
                     editBtn.innerHTML = `<i class="fa fa-check"></i>`
                 } else {
                     flag = true; 
-                    const updateValue = document.querySelector('.secondInput').value
+                    let updateValue = document.querySelector('.secondInput').value
                     console.log(updateValue)
                     let result = cloudServer().put(index,updateValue)
                     console.log(result)
-                    editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
                     span.innerHTML = updateValue
                     updateValue = ''
-                    li.appendChild(span)
-                   
+                    editBtn.innerHTML = `<i class="fas fa-pencil"></i>`                  
                 }
             })
             li.appendChild(editBtn)
