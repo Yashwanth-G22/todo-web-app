@@ -82,7 +82,6 @@ btn.addEventListener('click', (e) => {
 
 todoView().createAllTasks()
 
-const clearAll = document.querySelector('.clearAllBtn')
-    .addEventListener('click', cloudServer().deleteAll())
+document.querySelector('.clearAllBtn').addEventListener('click', cloudServer().deleteAll())
 
 //console.log(localServer().delete(0))
