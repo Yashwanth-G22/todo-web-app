@@ -35,7 +35,7 @@ function todoView() {
             const value = input.value
             if (value) {
                 input.value = '';
-                let result =(storage.value == "ac")? await cloudServer().post(value): localServer().set(value);
+                let result =(storage.value == "cloudStorage")? await cloudServer().post(value): localServer().set(value);
                 if (result.id && result.name) {
                     this.createLi(result.name, result.id)
                 }
@@ -48,7 +48,7 @@ function todoView() {
         },
 
         createAllTasks: async function () {
-            if(storage.value == "ac"){
+            if(storage.value == "cloudStorage"){
             let list = await cloudServer().get()
             list.map(({ name, id }) => {
                 this.createLi(name, id)
@@ -62,7 +62,7 @@ function todoView() {
         },
 
         singleTaskDelete: function (index, li) {
-            if(storage.value == "ac") cloudServer().delete(index)
+            if(storage.value == "cloudStorage") cloudServer().delete(index)
             else localServer().delete(index)
             ul.removeChild(li)
         },
@@ -97,6 +97,7 @@ btn.addEventListener('click', (e) => {
 })
 
 storage.addEventListener('change',()=>{
+    alert(`U are changing the storage you data will store in ${storage.value}`)
     ul.innerHTML = ''
     todoView().createAllTasks()
 })
