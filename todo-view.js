@@ -53,11 +53,19 @@ function todoView() {
         },
 
         createAllTasks: async function () {
+            if(storage.value == "ac"){
             let list = await cloudServer().get()
             console.log(list)
             list.map(({ name, id }) => {
                 this.createLi(name, id)
             })
+            }else{
+                let todo = localServer().get()
+                console.log(todo)
+                todo.forEach((elem , index)=>{
+                    this.createLi(elem , index)
+                })
+            }
         },
 
         singleTaskDelete: function (index, li) {
