@@ -21,6 +21,7 @@ function todoView() {
                 const update = document.createElement('input')
                 update.classList = 'secondInput'
                 update.type = 'text';
+                update.placeholder = elem;
                 if (flag) {
                     flag = false
                     span.innerHTML = ''
@@ -41,10 +42,7 @@ function todoView() {
             li.appendChild(editBtn)
             const btn = document.createElement('button')
             btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
-            btn.addEventListener('click', () => {
-                console.log('deleted')
-                cloudServer().delete(index)
-            })
+            btn.addEventListener('click', this.singleTaskDelete.bind(this,index,li))
             li.appendChild(btn)
             return ul.appendChild(li)
         },
@@ -55,8 +53,6 @@ function todoView() {
                 input.value = '';
                 console.log(value)
                 let result = await cloudServer().post(value)
-                console.log(result.status)
-
                 if (result.id && result.name) {
                     console.log('created')
                     this.createLi(result.name, result.id)
@@ -72,6 +68,11 @@ function todoView() {
                 this.createLi(name, id)
             })
         },
+        singleTaskDelete : function (index,li){
+                console.log('deleted')
+                cloudServer().delete(index)   
+                ul.removeChild(li[index])         
+        }
     }
 }
 
@@ -82,6 +83,9 @@ btn.addEventListener('click', (e) => {
 
 todoView().createAllTasks()
 
-document.querySelector('.clearAllBtn').addEventListener('click', cloudServer().deleteAll())
+document.querySelector('.clearAllBtn').addEventListener('click', ()=>{
+    console.log("All Deleted Msg")
+    cloudServer().deleteAll()
+})
 
 //console.log(localServer().delete(0))
