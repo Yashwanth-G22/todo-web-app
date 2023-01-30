@@ -105,9 +105,11 @@ btn.addEventListener('click', (e) => {
     todoView().createTask()
 })
 
-// storage.addEventListener('click',()=>{
-//     todoView().createAllTasks()
-// })
+//todoView().createTask()
+onchange = (storage) =>{
+    ul.innerHTML = '';
+    todoView().createAllTasks()
+}
 
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
