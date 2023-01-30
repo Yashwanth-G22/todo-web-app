@@ -105,7 +105,10 @@ btn.addEventListener('click', (e) => {
     todoView().createTask()
 })
 
-todoView().createAllTasks()
+storage.addEventListener('click',()=>{
+    todoView().createAllTasks()
+})
+
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
     console.log("All Deleted Msg")
