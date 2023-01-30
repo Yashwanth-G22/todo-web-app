@@ -37,15 +37,15 @@ function todoView() {
             if (value) {
                 input.value = '';
                 console.log(value)
-                let result =(storage.value == "ac")? await cloudServer().post(value): localServer().set(value);
+                let result = (storage.value == "cloud") ? await cloudServer().post(value) : localServer().set(value);
                 console.log(result)
                 if (result.id && result.name) {
                     console.log('created')
                     this.createLi(result.name, result.id)
                 }
-                else{
+                else {
                     console.log("Local created");
-                    this.createLi(value,result.length)
+                    this.createLi(value, result.length)
                 }
             } else {
                 alert('Enter task name')
@@ -53,29 +53,29 @@ function todoView() {
         },
 
         createAllTasks: async function () {
-            if(storage.value == "ac"){
-            let list = await cloudServer().get()
-            console.log(list)
-            list.map(({ name, id }) => {
-                this.createLi(name, id)
-            })
-            }else{
+            if (storage.value == "cloud") {
+                let list = await cloudServer().get()
+                console.log(list)
+                list.map(({ name, id }) => {
+                    this.createLi(name, id)
+                })
+            } else {
                 let todo = localServer().get()
                 console.log(todo)
-                todo.forEach((elem , index)=>{
-                    this.createLi(elem , index)
+                todo.forEach((elem, index) => {
+                    this.createLi(elem, index)
                 })
             }
         },
 
         singleTaskDelete: function (index, li) {
             console.log('deleted')
-            if(storage.value == "ac") cloudServer().delete(index)
+            if (storage.value == "cloud") cloudServer().delete(index)
             else localServer().delete(index)
             ul.removeChild(li)
         },
 
-        updateOfLi: function (span, index, elem , editBtn) {
+        updateOfLi: function (span, index, elem, editBtn) {
             const update = document.createElement('input')
             update.classList = 'secondInput'
             update.type = 'text';
@@ -91,13 +91,13 @@ function todoView() {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
                 console.log(updateValue)
-                let result = (checkBox.checked)?cloudServer().put(index, updateValue, true) : cloudServer().put(index, updateValue, false);
+                let result = (checkBox.checked) ? cloudServer().put(index, updateValue, true) : cloudServer().put(index, updateValue, false);
                 console.log(result)
                 span.innerHTML = updateValue
                 span.style.textDecoration = "line-through"
                 updateValue = ''
                 editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-            }          
+            }
         },
     }
 }
@@ -107,7 +107,7 @@ btn.addEventListener('click', (e) => {
     todoView().createTask()
 })
 
-storage.addEventListener('change',()=>{
+storage.addEventListener('change', () => {
     ul.innerHTML = ''
     todoView().createAllTasks()
 })
@@ -120,9 +120,9 @@ storage.addEventListener('change',()=>{
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
     console.log("All Deleted Msg")
-    if(storage.value == "ac") cloudServer().deleteAll()
-            else localServer().deleteAll()
-    
+    if (storage.value == "cloud") cloudServer().deleteAll()
+    else localServer().deleteAll()
+
 })
 
 //console.log(localServer().delete(0))
