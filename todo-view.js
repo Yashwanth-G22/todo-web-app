@@ -120,7 +120,9 @@ storage.addEventListener('change',()=>{
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
     console.log("All Deleted Msg")
-    cloudServer().deleteAll()
+    if(storage.value == "ac") cloudServer().deleteAll()
+            else localServer().deleteAll()
+    
 })
 
 //console.log(localServer().delete(0))
