@@ -15,6 +15,7 @@ function todoView() {
             li.classList = 'li-List';
             const input = document.createElement('input')
             input.type = 'checkbox';
+            input.classList = 'checkBox';
             li.appendChild(input)
             const span = document.createElement('span')
             span.innerText = elem
@@ -64,6 +65,7 @@ function todoView() {
             update.classList = 'secondInput'
             update.type = 'text';
             update.placeholder = elem;
+            let checkBox = document.querySelector('.checkBox')
             if (flag) {
                 flag = false
                 span.innerHTML = ''
@@ -74,12 +76,12 @@ function todoView() {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
                 console.log(updateValue)
-                let result = cloudServer().put(index, updateValue, false)
+                let result = (checkBox.checked)?cloudServer().put(index, updateValue, true) : cloudServer().put(index, updateValue, false);
                 console.log(result)
                 span.innerHTML = updateValue
                 updateValue = ''
                 editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-            }
+            }          
         },
     }
 }
