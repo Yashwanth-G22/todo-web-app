@@ -8,6 +8,7 @@ function localServer() {
             let set_Todo = this.get()
             set_Todo.push(todo)
             localStorage.setItem('todos',JSON.stringify(set_Todo))
+            return set_Todo;
         },
         delete: function delet(index) {
             let delete_Todo = this.get()

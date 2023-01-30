@@ -1,8 +1,9 @@
 import cloudServer from "./cloud-server.js";
 
 import localServer from "./localStorage-server.js";
-//console.log(cloudServer().deleteAll())
 
+let storage = document.querySelector(".storage")
+console.log(storage.value)
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
@@ -36,10 +37,15 @@ function todoView() {
             if (value) {
                 input.value = '';
                 console.log(value)
-                let result = await cloudServer().post(value)
+                let result =(storage.value == "ac")? await cloudServer().post(value): localServer().set(value);
+                console.log(result)
                 if (result.id && result.name) {
                     console.log('created')
                     this.createLi(result.name, result.id)
+                }
+                else{
+                    console.log("Local created")
+                    this.createLi(result.name , result.index)
                 }
             } else {
                 alert('Enter task name')
