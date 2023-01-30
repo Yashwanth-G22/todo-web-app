@@ -70,7 +70,8 @@ function todoView() {
 
         singleTaskDelete: function (index, li) {
             console.log('deleted')
-            cloudServer().delete(index)
+            if(storage.value == "ac") cloudServer().delete(index)
+            else localServer().delete(index)
             ul.removeChild(li)
         },
 
@@ -105,11 +106,15 @@ btn.addEventListener('click', (e) => {
     todoView().createTask()
 })
 
-//todoView().createTask()
-onchange = (storage) =>{
-    ul.innerHTML = '';
+storage.addEventListener('change',()=>{
+    ul.innerHTML = ''
     todoView().createAllTasks()
-}
+})
+//todoView().createTask()
+// onchange = (event) =>{
+//     ul.innerHTML = '';
+//     todoView().createAllTasks()
+// }
 
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
