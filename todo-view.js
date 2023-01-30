@@ -71,7 +71,7 @@ function todoView() {
         singleTaskDelete : function (index,li){
                 console.log('deleted')
                 cloudServer().delete(index)   
-                ul.removeChild(li[index])         
+                ul.removeChild(li)         
         }
     }
 }
