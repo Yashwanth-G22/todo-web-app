@@ -12,6 +12,9 @@ function todoView() {
         createLi: function (elem, index) {
             const li = document.createElement('li')
             li.classList = 'li-List';
+            const input = document.createElement('input')
+            input.type = 'checkbox'
+            li.appendChild(input)
             const span = document.createElement('span')
             span.innerText = elem
             li.appendChild(span)

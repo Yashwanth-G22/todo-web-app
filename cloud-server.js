@@ -24,13 +24,13 @@ function cloudServer() {
             })
             return response.json();
         },
-        put: async function (id, name) {
+        put: async function (id, name , value) {
             await this.set(`${apiURL}/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     "id": id,
                     "name": name,
-                    "isCompleted": true
+                    "isCompleted": value
                 })
             })
         },
