@@ -94,6 +94,7 @@ function todoView() {
                 let result = (checkBox.checked)?cloudServer().put(index, updateValue, true) : cloudServer().put(index, updateValue, false);
                 console.log(result)
                 span.innerHTML = updateValue
+                span.style.textDecoration = "line-through"
                 updateValue = ''
                 editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
             }          
