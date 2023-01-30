@@ -105,9 +105,9 @@ btn.addEventListener('click', (e) => {
     todoView().createTask()
 })
 
-storage.addEventListener('click',()=>{
-    todoView().createAllTasks()
-})
+// storage.addEventListener('click',()=>{
+//     todoView().createAllTasks()
+// })
 
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
