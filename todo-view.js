@@ -44,8 +44,8 @@ function todoView() {
                     this.createLi(result.name, result.id)
                 }
                 else{
-                    console.log("Local created")
-                    this.createLi(result.name , result.index)
+                    console.log("Local created");
+                    this.createLi(value,result.length)
                 }
             } else {
                 alert('Enter task name')
