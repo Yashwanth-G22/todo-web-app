@@ -21,7 +21,7 @@ function todoView() {
             li.appendChild(span)
             let editBtn = document.createElement('button')
             editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-            editBtn.addEventListener('click', this.updateOfLi.bind(this, span, index, elem, editBtn))
+            editBtn.addEventListener('click', this.updateOfLi.bind(this, span, index, elem, editBtn,input))
             li.appendChild(editBtn)
             const btn = document.createElement('button')
             btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
@@ -59,7 +59,7 @@ function todoView() {
             ul.removeChild(li)
         },
 
-        updateOfLi: function (span, index, elem , editBtn) {
+        updateOfLi: function (span, index, elem , editBtn,input) {
             const update = document.createElement('input')
             update.classList = 'secondInput'
             update.type = 'text';
