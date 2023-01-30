@@ -3,7 +3,6 @@ import cloudServer from "./cloud-server.js";
 import localServer from "./localStorage-server.js";
 
 let storage = document.querySelector(".storage")
-console.log(storage.value)
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
@@ -36,15 +35,11 @@ function todoView() {
             const value = input.value
             if (value) {
                 input.value = '';
-                console.log(value)
                 let result =(storage.value == "ac")? await cloudServer().post(value): localServer().set(value);
-                console.log(result)
                 if (result.id && result.name) {
-                    console.log('created')
                     this.createLi(result.name, result.id)
                 }
                 else{
-                    console.log("Local created");
                     this.createLi(value,result.length)
                 }
             } else {
@@ -55,13 +50,11 @@ function todoView() {
         createAllTasks: async function () {
             if(storage.value == "ac"){
             let list = await cloudServer().get()
-            console.log(list)
             list.map(({ name, id }) => {
                 this.createLi(name, id)
             })
             }else{
                 let todo = localServer().get()
-                console.log(todo)
                 todo.forEach((elem , index)=>{
                     this.createLi(elem , index)
                 })
@@ -69,7 +62,6 @@ function todoView() {
         },
 
         singleTaskDelete: function (index, li) {
-            console.log('deleted')
             if(storage.value == "ac") cloudServer().delete(index)
             else localServer().delete(index)
             ul.removeChild(li)
@@ -85,14 +77,11 @@ function todoView() {
                 flag = false
                 span.innerHTML = ''
                 span.appendChild(update)
-                console.log('1st click')
                 editBtn.innerHTML = `<i class="fa fa-check"></i>`
             } else {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
-                console.log(updateValue)
                 let result = (checkBox.checked)?cloudServer().put(index, updateValue, true) : cloudServer().put(index, updateValue, false);
-                console.log(result)
                 span.innerHTML = updateValue
                 span.style.textDecoration = "line-through"
                 updateValue = ''
@@ -111,16 +100,12 @@ storage.addEventListener('change',()=>{
     ul.innerHTML = ''
     todoView().createAllTasks()
 })
-//todoView().createTask()
-// onchange = (event) =>{   
-//     ul.innerHTML = '';
-//     todoView().createAllTasks()
-// }
+
+todoView().createAllTasks()
 
 
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
-    console.log("All Deleted Msg")
     cloudServer().deleteAll()
 })
 
