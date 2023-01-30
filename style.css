@@ -57,8 +57,11 @@ input[type="text"]{
     background-color: black;
     color: white;
 }
+.li-List>input{
+    margin-left: 10px;
+}
 .li-List>span{
-    margin-left: 25px  ;
+    margin-left:1px;
 }
 .deleteAll{
     background-color: rgb(82, 79, 11);
