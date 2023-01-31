@@ -123,4 +123,3 @@ document.querySelector('.clearAllBtn').addEventListener('click', () => {
     cloudServer().deleteAll()
 })
 
-//console.log(localServer().delete(0))
