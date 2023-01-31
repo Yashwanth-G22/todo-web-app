@@ -10,22 +10,20 @@ let flag = true
 function todoView() {
     return {
 
-        createLi: function (elem, index) {
+        createLi: function (elem, index,value) {
             const li = document.createElement('li')
             li.classList = 'li-List';
             const input = document.createElement('input')
+            const span = document.createElement('span')
             input.type = 'checkbox';
             input.classList = 'checkBox';
-            input.addEventListener('change',()=>{
-                span.style.textDecoration = 'line-through';
-            })
+            if(value){ input.checked = true , span.style.textDecoration = 'line-through'}
             li.appendChild(input)
-            const span = document.createElement('span')
             span.innerText = elem
             li.appendChild(span)
             let editBtn = document.createElement('button')
             editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-            editBtn.addEventListener('click', this.updateOfLi.bind(this, span, index, elem, editBtn))
+            editBtn.addEventListener('click', this.updateOfLi.bind(this, span, index, elem, editBtn , input))
             li.appendChild(editBtn)
             const btn = document.createElement('button')
             btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
@@ -40,7 +38,7 @@ function todoView() {
                 input.value = '';
                 let result =(storage.value == "cloudStorage")? await cloudServer().post(value): localServer().set(value);
                 if (result.id && result.name) {
-                    this.createLi(result.name, result.id)
+                    this.createLi(result.name, result.id , result.isCompleted)
                 }
                 else{
                     this.createLi(value,result.length)
@@ -53,8 +51,8 @@ function todoView() {
         createAllTasks: async function () {
             if(storage.value == "cloudStorage"){
             let list = await cloudServer().get()
-            list.map(({ name, id }) => {
-                this.createLi(name, id)
+            list.map(({ name, id , isCompleted}) => {
+                this.createLi(name, id , isCompleted)
             })
             }else{
                 let todo = localServer().get()
@@ -75,6 +73,7 @@ function todoView() {
             update.classList = 'secondInput'
             update.type = 'text';
             update.placeholder = elem;
+            console.log(input.checked)
             if (flag) {
                 flag = false
                 span.innerHTML = ''
@@ -83,11 +82,19 @@ function todoView() {
             } else {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
-                let result = (storage.value == "cloudStorage")?cloudServer().put(index, updateValue, false) : localServer().edit(index,updateValue);
+                if(input.checked === false){
+                (storage.value == "cloudStorage")?cloudServer().put(index, updateValue, true) : localServer().edit(index,updateValue);
+                span.style.textDecoration = 'line-through';
+                }else{
+                    (storage.value == "cloudStorage")?cloudServer().put(index, updateValue, false) : localServer().edit(index,updateValue);
+                }
                 span.innerHTML = updateValue
                 updateValue = ''
                 editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
             }          
+        },
+        checked : function(){
+
         },
     }
 }
