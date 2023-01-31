@@ -10,6 +10,12 @@ function localServer() {
             localStorage.setItem('todos',JSON.stringify(set_Todo))
             return set_Todo;
         },
+        edit: function edit(index,elem){
+            let edit_Todo = this.get()
+            edit_Todo.splice(index , 1,elem)
+            localStorage.setItem('todos',JSON.stringify(edit_Todo))
+        },
+
         delete: function delet(index) {
             let delete_Todo = this.get()
             delete_Todo.splice(index , 1)

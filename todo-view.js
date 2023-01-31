@@ -14,10 +14,13 @@ function todoView() {
             const li = document.createElement('li')
             li.classList = 'li-List';
             const input = document.createElement('input')
-            input.type = 'checkbox';
-            input.classList = 'checkBox';
-            li.appendChild(input)
             const span = document.createElement('span')
+            input.type = 'checkbox';
+            input.addEventListener('click',()=>{
+                cloudServer().put(index, updateValue, true)
+                span.style.textDecoration = 'line-through';
+            })
+            li.appendChild(input)
             span.innerText = elem
             li.appendChild(span)
             let editBtn = document.createElement('button')
@@ -72,7 +75,6 @@ function todoView() {
             update.classList = 'secondInput'
             update.type = 'text';
             update.placeholder = elem;
-            let checkBox = document.querySelector('.checkBox')
             if (flag) {
                 flag = false
                 span.innerHTML = ''
@@ -81,9 +83,8 @@ function todoView() {
             } else {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
-                let result = (checkBox.checked)?cloudServer().put(index, updateValue, true) : cloudServer().put(index, updateValue, false);
+                let result = (storage.value == "cloudStorage")?cloudServer().put(index, updateValue, false) : localServer().edit(index,updateValue);
                 span.innerHTML = updateValue
-                span.style.textDecoration = "line-through"
                 updateValue = ''
                 editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
             }          
@@ -97,7 +98,7 @@ btn.addEventListener('click', (e) => {
 })
 
 storage.addEventListener('change',()=>{
-    alert(`U are changing the storage you data will store in ${storage.value}`)
+    alert(`U are changing the storage .=> you data will store only in ${storage.value}`)
     ul.innerHTML = ''
     todoView().createAllTasks()
 })
