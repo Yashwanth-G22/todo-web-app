@@ -3,7 +3,6 @@ function cloudServer() {
 
     return {
         get: async function () {
-            console.log('yash')
             const response = await fetch(apiURL, { method: 'GET' })
             return response.json()
         },
