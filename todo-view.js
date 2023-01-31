@@ -18,6 +18,7 @@ function todoView() {
             input.type = 'checkbox';
             input.classList = 'checkBox';
             if(value){ input.checked = true , span.style.textDecoration = 'line-through'}
+            input.addEventListener('click',this.checked.bind(this,input,span,elem , index))
             li.appendChild(input)
             span.innerText = elem
             li.appendChild(span)
@@ -82,7 +83,7 @@ function todoView() {
             } else {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
-                if(input.checked === false){
+                if(input.checked !== false){
                 (storage.value == "cloudStorage")?cloudServer().put(index, updateValue, true) : localServer().edit(index,updateValue);
                 span.style.textDecoration = 'line-through';
                 }else{
@@ -93,8 +94,12 @@ function todoView() {
                 editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
             }          
         },
-        checked : function(){
-
+        checked : function(input , span , elem , index){
+            console.log('click')
+            if(input.checked){
+                span.style.textDecoration = "line-through";
+                cloudServer().put(index, elem , true)
+            }
         },
     }
 }
