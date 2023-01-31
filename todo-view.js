@@ -74,7 +74,6 @@ function todoView() {
             update.classList = 'secondInput'
             update.type = 'text';
             update.placeholder = elem;
-            console.log(input.checked)
             if (flag) {
                 flag = false
                 span.innerHTML = ''
@@ -95,7 +94,6 @@ function todoView() {
             }          
         },
         checked : function(input , span , elem , index){
-            console.log('click')
             if(input.checked){
                 span.style.textDecoration = "line-through";
                 cloudServer().put(index, elem , true)
