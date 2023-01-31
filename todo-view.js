@@ -14,13 +14,13 @@ function todoView() {
             const li = document.createElement('li')
             li.classList = 'li-List';
             const input = document.createElement('input')
-            const span = document.createElement('span')
             input.type = 'checkbox';
-            input.addEventListener('click',()=>{
-                cloudServer().put(index, updateValue, true)
+            input.classList = 'checkBox';
+            input.addEventListener('change',()=>{
                 span.style.textDecoration = 'line-through';
             })
             li.appendChild(input)
+            const span = document.createElement('span')
             span.innerText = elem
             li.appendChild(span)
             let editBtn = document.createElement('button')
