@@ -39,10 +39,10 @@ function todoView() {
                 input.value = '';
                 let result = (storage.value === "cloudStorage") ? await cloudServer().post(value) : localServer().set(value);
                 if (result.id && result.name) {
-                    this.createLi(result.name, result.id, result.isCompleted)
+                    this.createListElement(result.name, result.id, result.isCompleted)
                 }
                 else {
-                    this.createLi(value, result.length)
+                    this.createListElement(value, result.length)
                 }
             } else {
                 alert('Enter task name')
@@ -53,12 +53,12 @@ function todoView() {
             if (storage.value === "cloudStorage") {
                 let list = await cloudServer().get()
                 list.map(({ name, id, isCompleted }) => {
-                    this.createLi(name, id, isCompleted)
+                    this.createListElement(name, id, isCompleted)
                 })
             } else {
                 let todo = localServer().get()
                 todo.forEach((elem, index) => {
-                    this.createLi(elem, index)
+                    this.createListElement(elem, index)
                 })
             }
         },
