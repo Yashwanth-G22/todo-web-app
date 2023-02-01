@@ -37,7 +37,7 @@ function todoView() {
             const value = input.value
             if (value) {
                 input.value = '';
-                let result = (storage.value == "cloudStorage") ? await cloudServer().post(value) : localServer().set(value);
+                let result = (storage.value === "cloudStorage") ? await cloudServer().post(value) : localServer().set(value);
                 if (result.id && result.name) {
                     this.createLi(result.name, result.id, result.isCompleted)
                 }
@@ -50,7 +50,7 @@ function todoView() {
         },
 
         createAllTasks: async function () {
-            if (storage.value == "cloudStorage") {
+            if (storage.value === "cloudStorage") {
                 let list = await cloudServer().get()
                 list.map(({ name, id, isCompleted }) => {
                     this.createLi(name, id, isCompleted)
@@ -64,7 +64,7 @@ function todoView() {
         },
 
         singleTaskDelete: function (index, li) {
-            if (storage.value == "cloudStorage") cloudServer().delete(index)
+            if (storage.value === "cloudStorage") cloudServer().delete(index)
             else localServer().delete(index)
             ul.removeChild(li)
         },
@@ -83,10 +83,10 @@ function todoView() {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
                 if (input.checked !== false) {
-                    (storage.value == "cloudStorage") ? cloudServer().put(index, updateValue, true) : localServer().edit(index, updateValue);
+                    (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, true) : localServer().edit(index, updateValue);
                     span.style.textDecoration = 'line-through';
                 } else {
-                    (storage.value == "cloudStorage") ? cloudServer().put(index, updateValue, false) : localServer().edit(index, updateValue);
+                    (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, false) : localServer().edit(index, updateValue);
                 }
                 span.innerHTML = updateValue
                 updateValue = ''
