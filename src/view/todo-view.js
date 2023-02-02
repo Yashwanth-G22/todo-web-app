@@ -1,5 +1,4 @@
-
-
+import localServer from "../model/localStorage-server.js";
 let storage = document.querySelector(".storage")
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
@@ -100,5 +99,7 @@ function todoView() {
         },
     }
 }
+
+export default todoView
 
 
