@@ -1,3 +1,5 @@
+import { dataContorller } from '../controller/app-controller/todo-data-controller'
+
 const ul = document.querySelector('.taskList');
 let flag = true
 function todoView() {
@@ -11,14 +13,14 @@ function todoView() {
             input.type = 'checkbox';
             input.classList = 'checkBox';
             if (value) { input.checked = true, span.style.textDecoration = 'line-through' }
-            //input.addEventListener('click', this.checked.bind(this, input, span, elem, index))
+            input.addEventListener('click',dataContorller().checked.bind(this, input, span, elem, index))
             appendNode(li , input)
             appendNode(li , span)          
             let editBtn = createNode('button' , `<i class="fas fa-pencil"></i>`)
-            // editBtn.addEventListener('click', this.updateOfLi.bind(this, span, index, elem, editBtn, input))
+            editBtn.addEventListener('click', dataContorller().updateOfLi.bind(this, span, index, elem, editBtn, input))
             appendNode(li , editBtn) 
             const btn = createNode('button' , `<i class="fa-solid fa-xmark"></i>`)
-            // btn.addEventListener('click', this.singleTaskDelete.bind(this, index, li))
+            btn.addEventListener('click', dataContorller().singleTaskDelete.bind(this, index, li))
             appendNode(li , btn)
             return appendNode(ul , li)
         },
@@ -29,11 +31,14 @@ function createNode(elementName , elementValue = '') {
     let taskNode = document.createElement(elementName)
     taskNode.innerHTML = elementValue;
     return taskNode;
-    
 }
 
 function appendNode( parentNode , childNode ) {
     return parentNode.appendChild(childNode)
+}
+
+function eventListener(){
+
 }
 
 export default todoView
