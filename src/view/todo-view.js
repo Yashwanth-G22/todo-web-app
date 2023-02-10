@@ -1,47 +1,49 @@
 import control from "../controller/app-controller/todo-contorller";
 
-const ul = document.querySelector('.taskList');
-let flag = true
-function todoView() {
+
+export default function todoView() {
+    const ul = document.querySelector('.taskList');
+
     return {
 
         createListElement: function (elem, index, value) {
             const li = createNode('li')
             li.classList = 'li-List';
-            const input = createNode('input')
-            const span = createNode('span' , elem)
+            const input = this.createNode('input')
+            const span = this.createNode('span', elem)
             input.type = 'checkbox';
             input.classList = 'checkBox';
             if (value) { input.checked = true, span.style.textDecoration = 'line-through' }
-            input.addEventListener('click',control().checked.bind(this, input, span, elem, index))
-            appendNode(li , input)
-            appendNode(li , span)          
-            let editBtn = createNode('button' , `<i class="fas fa-pencil"></i>`)
+            input.addEventListener('click', control().checked.bind(this, input, span, elem, index))
+            this.appendNode(li, input)
+            this.appendNode(li, span)
+            let editBtn = this.createNode('button', `<i class="fas fa-pencil"></i>`)
             editBtn.addEventListener('click', control().updateOfLi.bind(this, span, index, elem, editBtn, input))
-            appendNode(li , editBtn) 
-            const btn = createNode('button' , `<i class="fa-solid fa-xmark"></i>`)
+            this.appendNode(li, editBtn)
+            const btn = this.createNode('button', `<i class="fa-solid fa-xmark"></i>`)
             btn.addEventListener('click', control().singleTaskDelete.bind(this, index, li))
-            appendNode(li , btn)
-            return appendNode(ul , li)
+            this.appendNode(li, btn)
+            return this.appendNode(ul, li)
+        },
+        createNode: function (elementName, elementValue = '') {
+            let taskNode = document.createElement(elementName)
+            taskNode.innerHTML = elementValue;
+            return taskNode;
+        },
+
+        appendNode: function (parentNode, childNode) {
+            return parentNode.appendChild(childNode)
         },
     }
 }
 
-function createNode(elementName , elementValue = '') {
-    let taskNode = document.createElement(elementName)
-    taskNode.innerHTML = elementValue;
-    return taskNode;
-}
+todoView().createListElement('worng', 2, false)
 
-function appendNode( parentNode , childNode ) {
-    return parentNode.appendChild(childNode)
-}
 
-export default todoView
 
-let variable = todoView().createListElement('yashu', 0, true)
-console.log(variable)
-console.log(todoView().createListElement('yashu', 0, true))
+
+
+
 
 
 

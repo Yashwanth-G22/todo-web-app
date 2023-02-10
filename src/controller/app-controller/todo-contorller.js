@@ -1,14 +1,12 @@
-
-import todoView from "../../view/todo-view.js";
-
-import cloudServer from "../controller/storage-controller/cloud-server.js";
-
+import todoView from "../../view/todo-view"
 import localServer from "../storage-controller/localStorage-server.js";
 
 
 let storage = document.querySelector(".storage")
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
+
+
 
 
 export default function control(){
@@ -73,7 +71,7 @@ export default function control(){
                 input.value = '';
                 let result = (storage.value === "cloudStorage") ? await cloudServer().post(value) : localServer().set(value);
                 if (result.id && result.name) {
-                    ttodoView().createListElement(result.name, result.id, result.isCompleted)
+                    todoView().createListElement(result.name, result.id, result.isCompleted)
                 }
                 else {
                     todoView().createListElement(value, result.length)
@@ -104,3 +102,7 @@ todoView().createAllTasks()
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
     cloudServer().deleteAll()
 })
+
+let variable = todoView().createListElement('yashu', 0, true)
+console.log(variable)
+console.log(todoView().createListElement('yashu', 0, true))
