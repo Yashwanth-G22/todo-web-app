@@ -1,8 +1,8 @@
-import cloudServer from "../controller/storage-controller/cloud-server.js";
 
 import todoView from "../../view/todo-view.js";
 
-import localServer from "../model/localStorage-server.js";
+import cloudServer from "../controller/storage-controller/cloud-server.js";
+
 
 
 let storage = document.querySelector(".storage")

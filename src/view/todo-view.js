@@ -37,14 +37,12 @@ function appendNode( parentNode , childNode ) {
     return parentNode.appendChild(childNode)
 }
 
-function eventListener(){
-
-}
-
 export default todoView
 
 let variable = todoView().createListElement('yashu', 0, true)
 console.log(variable)
 console.log(todoView().createListElement('yashu', 0, true))
+
+dataContorller().createAllTasks()
 
 
