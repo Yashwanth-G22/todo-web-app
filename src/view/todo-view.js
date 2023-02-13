@@ -1,4 +1,4 @@
-import control from "../controller/app-controller/todo-contorller";
+
 
 
 export default function todoView() {
