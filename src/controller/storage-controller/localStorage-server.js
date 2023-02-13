@@ -4,13 +4,13 @@ function localServer() {
             const todoList = (localStorage.getItem('todos'))? JSON.parse(localStorage.getItem('todos')) : []
             return todoList;
         },
-        set: function set(todo) {
+        post: function set(todo) {
             let set_Todo = this.get()
             set_Todo.push(todo)
             localStorage.setItem('todos',JSON.stringify(set_Todo))
             return set_Todo;
         },
-        edit: function edit(index,elem){
+        put: function edit(index,elem){
             let edit_Todo = this.get()
             edit_Todo.splice(index , 1,elem)
             localStorage.setItem('todos',JSON.stringify(edit_Todo))

@@ -51,10 +51,10 @@ let flag = true
                         flag = true;
                         let updateValue = document.querySelector('.secondInput').value
                         if (input.checked !== false) {
-                            (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, true) : localServer().edit(index, updateValue);
+                            (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, true) : localServer().put(index, updateValue);
                             span.style.textDecoration = 'line-through';
                         } else {
-                            (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, false) : localServer().edit(index, updateValue);
+                            (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, false) : localServer().put(index, updateValue);
                         }
                         span.innerHTML = updateValue
                         updateValue = ''
@@ -75,7 +75,7 @@ let flag = true
             const value = input.value
             if (value) {
                 input.value = '';
-                let result = (storage.value === "cloudStorage") ? await cloudServer().post(value) : localServer().set(value);
+                let result = (storage.value === "cloudStorage") ? await cloudServer().post(value) : localServer().post(value);
                 if (result.id && result.name) {
                     this.instance(result.name, result.id, result.isCompleted)
                 }
@@ -90,6 +90,14 @@ let flag = true
         instance : function (...options) {
             let eventManager = this.eventManager
             return todoView(eventManager).createListElement(...options)
+        },
+
+        selectStorage : async function () {
+            if(storage.value === "cloudStorage"){
+                return await cloudServer()
+            }else{
+                return localServer()
+            }
         }
     }
     
