@@ -1,7 +1,7 @@
  
  
  function cloudServer() {
-    const apiURL = `https://mk-ap-todo-webapi.azurewebsites.net/api/YeswanthTodoItems`;
+    const apiURL = `https://mk-todo-web-api.azurewebsites.net/api/YeswanthTodoItems`;
 
     return {
         get: async function () {

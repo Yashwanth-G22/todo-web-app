@@ -33,7 +33,7 @@ export default function control(){
             return {
                 singleTaskDelete: function (index, li) {
                     if (storage.value === "cloudStorage") cloudServer().delete(index)
-                    else localServer().delete(index)
+                    else localServer().delete(0)
                     ul.removeChild(li)
                 },
             
@@ -88,7 +88,6 @@ export default function control(){
         },
 
         instance : function (...options) {
-            
             return todoView(this.eventManager).createListElement(...options)
         }
     }
@@ -113,3 +112,4 @@ document.querySelector('.clearAllBtn').addEventListener('click', () => {
     cloudServer().deleteAll()
 })
 
+cloudServer().post('yash')
