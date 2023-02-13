@@ -9,10 +9,10 @@ let storage = document.querySelector(".storage")
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
+let flag = true
 
 
-
-export default function control(){
+ function control(){
 
     return{
         createAllTasks: async function () {
@@ -88,7 +88,8 @@ export default function control(){
         },
 
         instance : function (...options) {
-            return todoView(this.eventManager).createListElement(...options)
+            let eventManager = this.eventManager
+            return todoView(eventManager).createListElement(...options)
         }
     }
     
@@ -106,10 +107,9 @@ storage.addEventListener('change', () => {
 })
 
 
-
+control().createAllTasks()
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
     cloudServer().deleteAll()
 })
 
-cloudServer().post('yash')

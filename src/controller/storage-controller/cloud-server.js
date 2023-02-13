@@ -41,7 +41,7 @@
             })
         },
         deleteAll: function () {
-            this.set(`https://mk-ap-todo-webapi.azurewebsites.net/deleteAll`, {
+            this.set(`https://mk-todo-web-api.azurewebsites.net/deleteAll`, {
                 method: 'DELETE'
             })
         }
