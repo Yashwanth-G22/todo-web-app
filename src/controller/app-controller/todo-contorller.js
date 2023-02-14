@@ -11,7 +11,6 @@ const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
 let flag = true
 
-
  function control(){
 
     return{
@@ -94,7 +93,7 @@ let flag = true
 
         selectStorage : async function () {
             if(storage.value === "cloudStorage"){
-                return await cloudServer()
+                return cloudServer()
             }else{
                 return localServer()
             }
