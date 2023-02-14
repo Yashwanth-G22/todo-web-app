@@ -1,4 +1,4 @@
-import  cloudServer  from "../storage-controller/cloud-server.js"
+import cloudServer from "../storage-controller/cloud-server.js"
 
 import localServer from "../storage-controller/localStorage-server.js";
 
@@ -11,9 +11,9 @@ const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
 let flag = true
 
- function control(){
+function control() {
 
-    return{
+    return {
         createAllTasks: async function () {
             if (storage.value === "cloudStorage") {
                 let list = await cloudServer().get()
@@ -28,15 +28,15 @@ let flag = true
             }
         },
 
-        eventManager : function () {
+        eventManager: function () {
             return {
                 singleTaskDelete: function (index, li) {
                     if (storage.value === "cloudStorage") cloudServer().delete(index)
                     else localServer().delete(0)
                     ul.removeChild(li)
                 },
-            
-                updateOfLi: function (span, index, elem, editBtn) {
+
+                updateOfList: function (span, index, elem, editBtn) {
                     const update = document.createElement('input')
                     update.classList = 'secondInput'
                     update.type = 'text';
@@ -60,7 +60,7 @@ let flag = true
                         editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
                     }
                 },
-            
+
                 checked: function (input, span, elem, index) {
                     if (input.checked) {
                         span.style.textDecoration = "line-through";
@@ -69,8 +69,8 @@ let flag = true
                 },
             }
         },
-    
-        createSingleTask : async function () {
+
+        createSingleTask: async function () {
             const value = input.value
             if (value) {
                 input.value = '';
@@ -86,25 +86,25 @@ let flag = true
             }
         },
 
-        instance : function (...options) {
+        instance: function (...options) {
             let eventManager = this.eventManager
             return todoView(eventManager).createListElement(...options)
         },
 
-        selectStorage : async function () {
-            if(storage.value === "cloudStorage"){
+        selectStorage: async function () {
+            if (storage.value === "cloudStorage") {
                 return cloudServer()
-            }else{
+            } else {
                 return localServer()
             }
         }
     }
-    
+
 }
 
 btn.addEventListener('click', (e) => {
     e.preventDefault()
-    control().createSingleTask ()
+    control().createSingleTask()
 })
 
 storage.addEventListener('change', () => {
