@@ -1,7 +1,7 @@
- 
+ import config from "../../../config.json" assert { type: "json" };
  
  function cloudServer() {
-    const apiURL = `https://mk-todo-web-api.azurewebsites.net/api/YeswanthTodoItems`;
+    const apiURL = config.serverUrl;
 
     return {
         get: async function () {
