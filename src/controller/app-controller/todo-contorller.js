@@ -4,15 +4,17 @@ import localServer from "../storage-controller/localStorage-server.js";
 
 import todoView from "../../view/todo-view.js";
 
+import { eventManager } from "./event-manager.js";
 
 let storage = document.querySelector(".storage")
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
-let flag = true
+
 
 function control() {
 
+    let eventManager = eventManager()
     return {
         createAllTasks: async function () {
             if (storage.value === "cloudStorage") {
@@ -28,47 +30,7 @@ function control() {
             }
         },
 
-        eventManager: function () {
-            return {
-                singleTaskDelete: function (index, li) {
-                    if (storage.value === "cloudStorage") cloudServer().delete(index)
-                    else localServer().delete(0)
-                    ul.removeChild(li)
-                },
-
-                updateOfList: function (span, index, elem, editBtn) {
-                    const update = document.createElement('input')
-                    update.classList = 'secondInput'
-                    update.type = 'text';
-                    update.placeholder = elem;
-                    if (flag) {
-                        flag = false
-                        span.innerHTML = ''
-                        span.appendChild(update)
-                        editBtn.innerHTML = `<i class="fa fa-check"></i>`
-                    } else {
-                        flag = true;
-                        let updateValue = document.querySelector('.secondInput').value
-                        if (input.checked !== false) {
-                            (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, true) : localServer().put(index, updateValue);
-                            span.style.textDecoration = 'line-through';
-                        } else {
-                            (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, false) : localServer().put(index, updateValue);
-                        }
-                        span.innerHTML = updateValue
-                        updateValue = ''
-                        editBtn.innerHTML = `<i class="fas fa-pencil"></i>`
-                    }
-                },
-
-                checked: function (input, span, elem, index) {
-                    if (input.checked) {
-                        span.style.textDecoration = "line-through";
-                        cloudServer().put(index, elem, true)
-                    }
-                },
-            }
-        },
+        
 
         createSingleTask: async function () {
             const value = input.value
@@ -87,7 +49,7 @@ function control() {
         },
 
         instance: function (...options) {
-            let eventManager = this.eventManager
+            
             return todoView(eventManager).createListElement(...options)
         },
 
