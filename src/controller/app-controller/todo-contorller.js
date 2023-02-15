@@ -12,9 +12,10 @@ const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
 
 
+
 function control() {
 
-    let eventManager = eventManager()
+      
     return {
         createAllTasks: async function () {
             if (storage.value === "cloudStorage") {

@@ -1,7 +1,11 @@
+import cloudServer from "../storage-controller/cloud-server.js"
 
+import localServer from "../storage-controller/localStorage-server.js";
 
 export function eventManager () {    
 const ul = document.querySelector('.taskList');
+let storage = document.querySelector(".storage")
+const input = document.querySelector('.input');
 let flag = true
 
     return {
