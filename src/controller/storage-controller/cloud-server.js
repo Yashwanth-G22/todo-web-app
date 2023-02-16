@@ -4,20 +4,13 @@
     const apiURL = config.serverUrl;
 
     return {
-        get: async function () {
+        getAllItems: async function () {
             const response = await fetch(apiURL, { method: 'GET' })
             return response.json()
         },
-        set: async function (url, options) {
-            const header = new Headers
-            header.append('content-type', 'application/json');
-            return fetch(url, {
-                ...options,
-                headers: header,
-            })
-        },
-        post: async function (name) {
-            const response = await this.set(apiURL, {
+        
+        postSingleItem: async function (name) {
+            const response = await set(apiURL, {
                 method: 'POST',
                 body: JSON.stringify({
                     name: name
@@ -25,8 +18,8 @@
             })
             return response.json();
         },
-        put: async function (id, name , value) {
-            await this.set(`${apiURL}/${id}`, {
+        putSingleItem: async function (id, name , value) {
+            await set(`${apiURL}/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     "id": id,
@@ -35,18 +28,27 @@
                 })
             })
         },
-        delete: function (id) {
-            this.set(`${apiURL}/${id}`, {
+        deleteSingleItem: function (id) {
+            set(`${apiURL}/${id}`, {
                 method: 'DELETE',
             })
         },
-        deleteAll: function () {
-            this.set(`https://mk-todo-web-api.azurewebsites.net/deleteAll`, {
+        deleteAllItems: function () {
+            set(`https://mk-todo-web-api.azurewebsites.net/deleteAll`, {
                 method: 'DELETE'
             })
         }
     }
 
+}
+
+  function set(url, options) {
+    const header = new Headers
+    header.append('content-type', 'application/json');
+    return fetch(url, {
+        ...options,
+        headers: header,
+    })
 }
 
 

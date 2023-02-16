@@ -2,16 +2,17 @@ import cloudServer from "../storage-controller/cloud-server.js"
 
 import localServer from "../storage-controller/localStorage-server.js";
 
-export function eventManager () {    
+const storage = document.querySelector(".storage")
 const ul = document.querySelector('.taskList');
-let storage = document.querySelector(".storage")
 const input = document.querySelector('.input');
 let flag = true
+let setStorage = selectStorage()
+
+export function eventManager () {    
 
     return {
         singleTaskDelete: function (index, li) {
-            if (storage.value === "cloudStorage") cloudServer().delete(index)
-            else localServer().delete(0)
+            setStorage().deleteSingleItem(index)
             ul.removeChild(li)
         },
 
@@ -29,10 +30,10 @@ let flag = true
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
                 if (input.checked !== false) {
-                    (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, true) : localServer().put(index, updateValue);
+                    setStorage().putSingleItem(index, updateValue, true) 
                     span.style.textDecoration = 'line-through';
                 } else {
-                    (storage.value === "cloudStorage") ? cloudServer().put(index, updateValue, false) : localServer().put(index, updateValue);
+                    setStorage().putSingleItem(index, updateValue, false)
                 }
                 span.innerHTML = updateValue
                 updateValue = ''
@@ -43,8 +44,16 @@ let flag = true
         checked: function (input, span, elem, index) {
             if (input.checked) {
                 span.style.textDecoration = "line-through";
-                cloudServer().put(index, elem, true)
+                cloudServer().putSingleItem(index, elem, true)
             }
         },
+    }
+}
+
+function selectStorage () {
+    if (storage.value === "cloudStorage"){
+        return cloudServer
+    } else {
+        return localServer
     }
 }

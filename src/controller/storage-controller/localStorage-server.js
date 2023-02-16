@@ -1,27 +1,27 @@
 function localServer() {
     return {
-        get: function get() {
+        getAllItems: function get() {
             const todoList = (localStorage.getItem('todos'))? JSON.parse(localStorage.getItem('todos')) : []
             return todoList;
         },
-        post: function set(todo) {
+        postSingleItem: function set(todo) {
             let set_Todo = this.get()
             set_Todo.push(todo)
             localStorage.setItem('todos',JSON.stringify(set_Todo))
             return set_Todo;
         },
-        put: function edit(index,elem){
+        putSingleItem: function edit(index,elem){
             let edit_Todo = this.get()
             edit_Todo.splice(index , 1,elem)
             localStorage.setItem('todos',JSON.stringify(edit_Todo))
         },
 
-        delete: function delet(index) {
+        deleteSingleItem: function delet(index) {
             let delete_Todo = this.get()
             delete_Todo.splice(index , 1)
             localStorage.setItem('todos',JSON.stringify(delete_Todo))
         },
-        deleteAll: function deleteAll() {
+        deleteAllItems: function deleteAll() {
             let deleteAll_Todo = this.get()
             deleteAll_Todo = []
             localStorage.setItem('todos',JSON.stringify(deleteAll_Todo))

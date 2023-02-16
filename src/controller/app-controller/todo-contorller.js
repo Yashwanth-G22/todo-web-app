@@ -10,34 +10,33 @@ let storage = document.querySelector(".storage")
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
-
+let setStorage = selectStorage()
 
 
 function control() {
 
-      
     return {
         createAllTasks: async function () {
             if (storage.value === "cloudStorage") {
-                let list = await cloudServer().get()
+                let list = await cloudServer().getAllItems()
                 list.map(({ name, id, isCompleted }) => {
                     this.instance(name, id, isCompleted)
                 })
             } else {
-                let todo = localServer().get()
+                let todo = localServer().getAllItems()
                 todo.forEach((elem, index) => {
                     this.instance(elem, index)
                 })
             }
         },
 
-        
+
 
         createSingleTask: async function () {
             const value = input.value
             if (value) {
                 input.value = '';
-                let result = (storage.value === "cloudStorage") ? await cloudServer().post(value) : localServer().post(value);
+                let result =await setStorage().postSingleItem(value) 
                 if (result.id && result.name) {
                     this.instance(result.name, result.id, result.isCompleted)
                 }
@@ -50,19 +49,20 @@ function control() {
         },
 
         instance: function (...options) {
-            
             return todoView(eventManager).createListElement(...options)
         },
 
-        selectStorage: async function () {
-            if (storage.value === "cloudStorage") {
-                return cloudServer()
-            } else {
-                return localServer()
-            }
-        }
     }
 
+}
+
+
+function selectStorage() {
+    if (storage.value === "cloudStorage") {
+        return cloudServer
+    } else {
+        return localServer
+    }
 }
 
 btn.addEventListener('click', (e) => {
@@ -80,6 +80,7 @@ storage.addEventListener('change', () => {
 control().createAllTasks()
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
-    cloudServer().deleteAll()
+    setStorage().deleteAllItems()
 })
 
+console.log(storage)
