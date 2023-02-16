@@ -10,11 +10,21 @@ let storage = document.querySelector(".storage")
 const input = document.querySelector('.input');
 const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
-let setStorage = selectStorage()
+
+
+
+function selectStorage() {
+    if (storage.value === "localStorage") {
+        return localServer
+    } else {
+        return cloudServer
+    }
+}
+
 
 
 function control() {
-
+    let setStorage = selectStorage()
     return {
         createAllTasks: async function () {
             if (storage.value === "cloudStorage") {
@@ -22,11 +32,13 @@ function control() {
                 list.map(({ name, id, isCompleted }) => {
                     this.instance(name, id, isCompleted)
                 })
+                
             } else {
                 let todo = localServer().getAllItems()
                 todo.forEach((elem, index) => {
                     this.instance(elem, index)
                 })
+                
             }
         },
 
@@ -57,13 +69,7 @@ function control() {
 }
 
 
-function selectStorage() {
-    if (storage.value === "cloudStorage") {
-        return cloudServer
-    } else {
-        return localServer
-    }
-}
+
 
 btn.addEventListener('click', (e) => {
     e.preventDefault()
@@ -74,13 +80,15 @@ storage.addEventListener('change', () => {
     alert(`U are changing the storage .=> you data will store only in ${storage.value}`)
     ul.innerHTML = ''
     control().createAllTasks()
+    
 })
 
 
 control().createAllTasks()
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
+    let setStorage = selectStorage()
     setStorage().deleteAllItems()
 })
 
-console.log(storage)
+

@@ -6,10 +6,10 @@ const storage = document.querySelector(".storage")
 const ul = document.querySelector('.taskList');
 const input = document.querySelector('.input');
 let flag = true
-let setStorage = selectStorage()
+
 
 export function eventManager () {    
-
+    let setStorage = selectStorage()
     return {
         singleTaskDelete: function (index, li) {
             setStorage().deleteSingleItem(index)
