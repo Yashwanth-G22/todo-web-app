@@ -8,7 +8,7 @@ export default function todoView(eventManager) {
     
     return {
 
-        createListElement: function (elem , index , value) {
+        createListElement: function ( elem , index , value) {
             const li = createNode('li')
             li.classList = 'li-List';
             const span = createNode('span', elem)
@@ -16,6 +16,7 @@ export default function todoView(eventManager) {
             appendNode(li, span)
             appendNode(li, editButton(span, index, elem , updateOfList))
             appendNode(li, deleteButton(singleTaskDelete , index , li))
+            console.log(index)
             return appendNode(ul, li)
         },
     }

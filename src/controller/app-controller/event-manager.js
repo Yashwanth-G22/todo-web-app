@@ -45,10 +45,10 @@ export function eventManager () {
         checked: function (input, span, elem, index) {
             if (input.checked) {
                 span.style.textDecoration = "line-through";
-                cloudServer().putSingleItem(index, elem, true)
+                setStorage().putSingleItem(index, elem, true)
             }else{
                 span.style.textDecoration = "";
-                cloudServer().putSingleItem(index, elem, false)
+                setStorage().putSingleItem(index, elem, false)
             }
         },
     }

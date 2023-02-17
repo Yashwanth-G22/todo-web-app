@@ -35,11 +35,13 @@ function control() {
                 
             } else {
                 let todo = localServer().getAllItems()
-                todo.forEach((elem, index) => {
-                    this.instance(elem, index)
+                todo.map(({ name , id , isCompleted}) => {
+                    this.instance( name , id , isCompleted)
+                    console.log(id)
                 })
                 
             }
+            
         },
 
 
@@ -53,7 +55,8 @@ function control() {
                     this.instance(result.name, result.id, result.isCompleted)
                 }
                 else {
-                    this.instance(value, result.length)
+                    this.instance( value , result.id)
+                    console.log(result)
                 }
             } else {
                 alert('Enter task name')

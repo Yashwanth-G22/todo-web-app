@@ -1,7 +1,7 @@
-export function todoObject( id , name , isCompleted){
+export function todoObject(  name , id = '',isCompleted = false){
     return {
-        id : id ,
         name : name ,
+        id : id ,
         isCompleted : isCompleted,
     }
 }
