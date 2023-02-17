@@ -30,10 +30,11 @@ export function eventManager () {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
                 if (input.checked !== false) {
-                    setStorage().putSingleItem(index, updateValue, true) 
-                    span.style.textDecoration = 'line-through';
+                    setStorage().putSingleItem(index, updateValue, false ) 
                 } else {
-                    setStorage().putSingleItem(index, updateValue, false)
+                    setStorage().putSingleItem(index, updateValue, true)
+                    span.style.textDecoration = 'line-through';
+
                 }
                 span.innerHTML = updateValue
                 updateValue = ''
@@ -45,6 +46,9 @@ export function eventManager () {
             if (input.checked) {
                 span.style.textDecoration = "line-through";
                 cloudServer().putSingleItem(index, elem, true)
+            }else{
+                span.style.textDecoration = "";
+                cloudServer().putSingleItem(index, elem, false)
             }
         },
     }
