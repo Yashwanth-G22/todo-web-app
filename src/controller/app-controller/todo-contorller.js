@@ -71,10 +71,12 @@ btn.addEventListener('click', (e) => {
 })
 
 storage.addEventListener('change', () => {
-    alert(`U are changing the storage .=> you data will store only in ${storage.value}`)
-    ul.innerHTML = ''
-    control().createAllTasks()
-    
+   let changeStorage = confirm(`U are changing the storage .=> you data will store only in ${storage.value}`)
+
+    if(changeStorage === true){
+        ul.innerHTML = ''
+        control().createAllTasks()
+    }    
 })
 
 control().createAllTasks()
