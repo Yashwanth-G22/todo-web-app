@@ -1,12 +1,13 @@
 
 
-
 export default function todoView(eventManager) {
     const ul = document.querySelector('.taskList');
        
     const { checked , updateOfList , singleTaskDelete } =  eventManager()
     
     return {
+
+        //create list element , append and return ul
 
         createListElement: function ( elem , index , value) {
             const li = createNode('li')
@@ -22,16 +23,19 @@ export default function todoView(eventManager) {
     }
 }
 
+    //new elements create function
 function createNode(elementName, elementValue = '') {
     let taskNode = document.createElement(elementName)
     taskNode.innerHTML = elementValue;
     return taskNode;
 }
 
+     // appending parent and child nodes
  function appendNode(parentNode, childNode) {
     return parentNode.appendChild(childNode)
 }
 
+    // updateButton function 
 function updateInput(span , elem , index , value , checked){
     const input = createNode('input')
     input.type = 'checkbox';
@@ -42,6 +46,7 @@ function updateInput(span , elem , index , value , checked){
     return input;
 }
 
+    //edit button function
 function editButton(span, index, elem , updateOfList){
     let editBtn = createNode('button', `<i class="fas fa-pencil"></i>`)
     editBtn.addEventListener('click', updateOfList.bind(this, span, index, elem, editBtn))
@@ -49,19 +54,10 @@ function editButton(span, index, elem , updateOfList){
     return editBtn
 }
 
+    //delete button function
 function deleteButton(singleTaskDelete , index , li){
     const button = createNode('button', `<i class="fa-solid fa-xmark"></i>`)
     button.addEventListener('click', singleTaskDelete.bind(this, index, li))
     
     return button
 }
-
-
-
-
-
-
-
-
-
-

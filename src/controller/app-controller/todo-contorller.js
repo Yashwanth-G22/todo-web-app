@@ -12,7 +12,6 @@ const btn = document.querySelector('.btn');
 const ul = document.querySelector('.taskList');
 
 
-
 function selectStorage() {
     if (storage.value === "localStorage") {
         return localServer
@@ -20,8 +19,6 @@ function selectStorage() {
         return cloudServer
     }
 }
-
-
 
 function control() {
     let setStorage = selectStorage()
@@ -43,8 +40,6 @@ function control() {
             }
             
         },
-
-
 
         createSingleTask: async function () {
             const value = input.value
@@ -68,11 +63,7 @@ function control() {
         },
 
     }
-
 }
-
-
-
 
 btn.addEventListener('click', (e) => {
     e.preventDefault()
@@ -86,12 +77,9 @@ storage.addEventListener('change', () => {
     
 })
 
-
 control().createAllTasks()
 
 document.querySelector('.clearAllBtn').addEventListener('click', () => {
     let setStorage = selectStorage()
     setStorage().deleteAllItems()
 })
-
-

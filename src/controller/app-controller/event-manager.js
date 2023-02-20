@@ -7,7 +7,6 @@ const ul = document.querySelector('.taskList');
 const input = document.querySelector('.input');
 let flag = true
 
-
 export function eventManager () {    
     let setStorage = selectStorage()
     return {
@@ -30,11 +29,11 @@ export function eventManager () {
                 flag = true;
                 let updateValue = document.querySelector('.secondInput').value
                 if (input.checked !== false) {
-                    setStorage().putSingleItem(index, updateValue, false ) 
-                } else {
                     setStorage().putSingleItem(index, updateValue, true)
                     span.style.textDecoration = 'line-through';
-
+                } else {
+                    
+                    setStorage().putSingleItem(index, updateValue, false ) 
                 }
                 span.innerHTML = updateValue
                 updateValue = ''
